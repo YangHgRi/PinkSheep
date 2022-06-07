@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import yanghgri.pinksheep.entity.User;
 import yanghgri.pinksheep.service.UserService;
 
-import java.util.List;
-
 @RestController
 @Slf4j
 public class UserController {
@@ -20,7 +18,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> selectAll() {
-        return service.selectAll();
+    public User selectByPrimaryKey(Long userId) {
+        return service.selectByPrimaryKey(userId);
     }
 }
