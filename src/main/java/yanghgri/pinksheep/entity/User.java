@@ -1,12 +1,13 @@
 package yanghgri.pinksheep.entity;
 
+import lombok.Data;
+
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import lombok.Data;
 
 /**
- * 
  * @TableName user
  */
 @Data
@@ -14,6 +15,7 @@ public class User implements Serializable {
     /**
      * 唯一主键,用户ID
      */
+    @Positive
     private Long id;
 
     /**

@@ -18,7 +18,7 @@ public class UserService {
         return mapper.selectByPrimaryKey(userId);
     }
 
-    public int logOn(User user) {
+    public int logon(User user) {
         return mapper.logon(user);
     }
 }

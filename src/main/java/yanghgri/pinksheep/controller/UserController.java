@@ -18,10 +18,8 @@ public class UserController {
         this.service = service;
     }
 
-    @PostMapping("logon")
-    public int logOn(@RequestBody User user) {
-        log.info(user.toString());
-        return 1;
-//        return service.logon(user);
+    @PostMapping("/logon")
+    public int logon(@RequestBody User user) {
+        return service.logon(user);
     }
 }
