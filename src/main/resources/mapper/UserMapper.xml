@@ -17,6 +17,8 @@
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
         <result property="email" column="email" jdbcType="VARCHAR"/>
         <result property="deleted" column="deleted" jdbcType="BIT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="creatorId" column="creator_id" jdbcType="BIGINT"/>
         <result property="updaterId" column="updater_id" jdbcType="BIGINT"/>
     </resultMap>
@@ -34,10 +36,13 @@
                phone,
                email,
                deleted,
+               create_time,
+               update_time,
                creator_id,
                updater_id
         from user
         where id = #{id,jdbcType=BIGINT}
+          AND deleted = 0;
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -45,19 +50,19 @@
         from user
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="yanghgri.pinksheep.entity.User"
+    <insert id="logon" keyColumn="id" keyProperty="id" parameterType="yanghgri.pinksheep.entity.User"
             useGeneratedKeys="true">
         insert into user
-        ( id, corp_id, dept_id
+        ( corp_id, dept_id
         , post_id, name, account
         , password, gender, birthday
-        , phone, email, deleted
+        , phone, email
         , creator_id, updater_id)
-        values ( #{id,jdbcType=BIGINT}, #{corpId,jdbcType=BIGINT}, #{deptId,jdbcType=BIGINT}
+        values ( #{corpId,jdbcType=BIGINT}, #{deptId,jdbcType=BIGINT}
                , #{postId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}
                , #{password,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{birthday,jdbcType=DATE}
-               , #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}
-               , #{creatorId,jdbcType=BIGINT}, #{updaterId,jdbcType=BIGINT})
+               , #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}
+               , id, id)
     </insert>
     <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="yanghgri.pinksheep.entity.User"
             useGeneratedKeys="true">
@@ -74,7 +79,6 @@
             <if test="birthday != null">birthday,</if>
             <if test="phone != null">phone,</if>
             <if test="email != null">email,</if>
-            <if test="deleted != null">deleted,</if>
             <if test="creatorId != null">creator_id,</if>
             <if test="updaterId != null">updater_id,</if>
         </trim>
@@ -90,7 +94,6 @@
             <if test="birthday != null">#{birthday,jdbcType=DATE},</if>
             <if test="phone != null">#{phone,jdbcType=VARCHAR},</if>
             <if test="email != null">#{email,jdbcType=VARCHAR},</if>
-            <if test="deleted != null">#{deleted,jdbcType=BIT},</if>
             <if test="creatorId != null">#{creatorId,jdbcType=BIGINT},</if>
             <if test="updaterId != null">#{updaterId,jdbcType=BIGINT},</if>
         </trim>
@@ -142,19 +145,21 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="yanghgri.pinksheep.entity.User">
         update user
-        set corp_id    = #{corpId,jdbcType=BIGINT},
-            dept_id    = #{deptId,jdbcType=BIGINT},
-            post_id    = #{postId,jdbcType=BIGINT},
-            name       = #{name,jdbcType=VARCHAR},
-            account    = #{account,jdbcType=VARCHAR},
-            password   = #{password,jdbcType=VARCHAR},
-            gender     = #{gender,jdbcType=BIT},
-            birthday   = #{birthday,jdbcType=DATE},
-            phone      = #{phone,jdbcType=VARCHAR},
-            email      = #{email,jdbcType=VARCHAR},
-            deleted    = #{deleted,jdbcType=BIT},
-            creator_id = #{creatorId,jdbcType=BIGINT},
-            updater_id = #{updaterId,jdbcType=BIGINT}
+        set corp_id     = #{corpId,jdbcType=BIGINT},
+            dept_id     = #{deptId,jdbcType=BIGINT},
+            post_id     = #{postId,jdbcType=BIGINT},
+            name        = #{name,jdbcType=VARCHAR},
+            account     = #{account,jdbcType=VARCHAR},
+            password    = #{password,jdbcType=VARCHAR},
+            gender      = #{gender,jdbcType=BIT},
+            birthday    = #{birthday,jdbcType=DATE},
+            phone       = #{phone,jdbcType=VARCHAR},
+            email       = #{email,jdbcType=VARCHAR},
+            deleted     = #{deleted,jdbcType=BIT},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            creator_id  = #{creatorId,jdbcType=BIGINT},
+            updater_id  = #{updaterId,jdbcType=BIGINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

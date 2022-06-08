@@ -1,11 +1,12 @@
 package yanghgri.pinksheep.entity;
 
-import lombok.Data;
-
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
+ * 
  * @TableName user
  */
 @Data
@@ -69,6 +70,16 @@ public class User implements Serializable {
      * 是否已删除，已删除为1，未删除为0
      */
     private Boolean deleted;
+
+    /**
+     * 行创建时间
+     */
+    private LocalDateTime createTime;
+
+    /**
+     * 行更新时间
+     */
+    private LocalDateTime updateTime;
 
     /**
      * 行创建者用户ID

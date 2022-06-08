@@ -17,4 +17,8 @@ public class UserService {
     public User selectByPrimaryKey(Long userId) {
         return mapper.selectByPrimaryKey(userId);
     }
+
+    public int logOn(User user) {
+        return mapper.logon(user);
+    }
 }

@@ -6,7 +6,7 @@ import yanghgri.pinksheep.entity.User;
 /**
  * @author YangHgRi
  * @description 针对表【user】的数据库操作Mapper
- * @createDate 2022-06-07 22:10:09
+ * @createDate 2022-06-08 11:31:53
  * @Entity yanghgri.pinksheep.entity.User
  */
 @Mapper
@@ -14,7 +14,7 @@ public interface UserMapper {
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(User record);
+    int logon(User record);
 
     int insertSelective(User record);
 
