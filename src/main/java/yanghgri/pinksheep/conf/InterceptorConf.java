@@ -9,6 +9,6 @@ import yanghgri.pinksheep.interceptor.LoginStateInterceptor;
 public class InterceptorConf implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginStateInterceptor()).addPathPatterns("/**").excludePathPatterns("/login", "/logon", "/error");
+        registry.addInterceptor(new LoginStateInterceptor()).addPathPatterns("/**").excludePathPatterns("/signup", "/signin", "/error");
     }
 }

@@ -44,12 +44,18 @@
           AND deleted = 0;
     </select>
 
+    <select id="selectByAccount" parameterType="string" resultMap="BaseResultMap">
+        SELECT id, password
+        FROM user
+        WHERE account = #{account,jdbcType=VARCHAR}
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from user
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="logon" keyColumn="id" keyProperty="id" parameterType="yanghgri.pinksheep.entity.User"
+    <insert id="signup" keyColumn="id" keyProperty="id" parameterType="yanghgri.pinksheep.entity.User"
             useGeneratedKeys="true">
         insert into user
         ( corp_id, dept_id

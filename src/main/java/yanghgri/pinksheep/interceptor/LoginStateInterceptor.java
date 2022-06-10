@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import yanghgri.pinksheep.common.TokenUtil;
+import yanghgri.pinksheep.enums.RedisKey;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +18,6 @@ public class LoginStateInterceptor implements HandlerInterceptor {
     private static final String TOKEN_HEADER = "Auth";
 
     private static final String USER_ID_CLAIM_KEY = "userId";
-
-    private static final String UNAVAILABLE_USER = "unavailable_user";
 
     private RedisTemplate<String, Object> template;
 
@@ -36,7 +35,7 @@ public class LoginStateInterceptor implements HandlerInterceptor {
             return false;
         }
         String userId = JWT.decode(requestToken).getClaim(USER_ID_CLAIM_KEY).asString();
-        if (Boolean.TRUE.equals(template.opsForValue().getBit(UNAVAILABLE_USER, Long.parseLong(userId)))) {
+        if (Boolean.TRUE.equals(template.opsForValue().getBit(RedisKey.UNAVAILABLE_USER.getKey(), Long.parseLong(userId)))) {
             log.info("{} # preHandle: 该用户已禁止活动状态", LoginStateInterceptor.class.getName());
             response.setStatus(401);
             return false;

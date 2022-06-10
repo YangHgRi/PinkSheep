@@ -14,7 +14,9 @@ public interface UserMapper {
 
     int deleteByPrimaryKey(Long id);
 
-    int logon(User record);
+    int signup(User record);
+
+    User selectByAccount(String account);
 
     int insertSelective(User record);
 
