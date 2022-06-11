@@ -2,10 +2,18 @@ package yanghgri.pinksheep.enums;
 
 import lombok.Getter;
 
-public enum ErrorCode {
-    ;
+public enum StatusCode {
+    OK(200), UNDEFINED(500);
+
+    @Getter
+    private final int code;
+
+    StatusCode(int code) {
+        this.code = code;
+    }
 
     public enum DATA_NOT_EXIST {
+
         NOT_EXIST_USER(401);
         @Getter
         private final int code;

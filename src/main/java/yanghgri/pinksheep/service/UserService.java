@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import yanghgri.pinksheep.entity.User;
-import yanghgri.pinksheep.enums.ErrorCode;
+import yanghgri.pinksheep.enums.StatusCode;
 import yanghgri.pinksheep.mapper.UserMapper;
 
 import java.util.Objects;
@@ -31,10 +31,10 @@ public class UserService {
     public Number signin(String account, String password) {
         User user = mapper.selectByAccount(account);
         if (user == null) {
-            return ErrorCode.DATA_NOT_EXIST.NOT_EXIST_USER.getCode();
+            return StatusCode.DATA_NOT_EXIST.NOT_EXIST_USER.getCode();
         }
         if (!Objects.equals(password, user.getPassword())) {
-            return ErrorCode.INVALID_PARAMETER.WRONG_USER_PASSWORD.getCode();
+            return StatusCode.INVALID_PARAMETER.WRONG_USER_PASSWORD.getCode();
         }
         return user.getId();
     }
